@@ -15,7 +15,6 @@
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@pinia/nuxt": "^0.5.5",
     "@supabase/supabase-js": "^2.45.4",
-    "@vite-pwa/nuxt": "^0.10.5",
     "axios": "^1.7.7",
     "nuxt": "^3.13.0",
     "pinia": "^2.2.4",
@@ -24,6 +23,7 @@
   },
   "devDependencies": {
     "@vite-pwa/assets-generator": "^0.2.6",
+    "@vite-pwa/nuxt": "^0.10.5",
     "nuxt-lodash": "^2.5.3"
   }
 }
