@@ -15,8 +15,8 @@ onMounted(() => {
   <div>
     <!--NuxtLayout :name="layout"-->
     <NuxtLayout>
-      <!--VitePwaManifest /-->
-      <!--NuxtPwaManifest /-->
+      <VitePwaManifest />
+      <NuxtPwaManifest />
       <NuxtPage/>
     </NuxtLayout>
   </div>
