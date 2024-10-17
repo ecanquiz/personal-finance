@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: false,
+  //ssr: false,
   // baseURL: '/personal-finance/',
   devServer: {
     port: 3000, // 3000 by default, change to 80 to dev container
@@ -36,6 +36,7 @@ export default defineNuxtConfig({
      public: { API_BASE_URL: process.env.API_BASE_URL, },
   },
   devtools: { enabled: true },
+  css: [`assets/styles/main.css`],
   pwa: {
     manifest: {
       name: 'Personal Finance',
