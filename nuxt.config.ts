@@ -20,11 +20,13 @@ export default defineNuxtConfig({
   //css: [`assets/styles/main.css`],
   //css: [`assets/styles/main.min.css`],
   modules: [//'@nuxtjs/supabase',
+  "nuxt-lodash",
   '@nuxt/ui',
   '@nuxtjs/tailwindcss', 
   '@vite-pwa/nuxt',
-  "nuxt-lodash",
-  '@/modules/User/module', '@pinia/nuxt', '@nuxt/ui', '@vite-pwa/nuxt'],
+  '@pinia/nuxt',
+  '@nuxt/ui',
+  '@/modules/User/module'],
   pinia: {
     storesDirs: ['./stores/**', './custom-folder/stores/**'],
   },
@@ -62,10 +64,11 @@ export default defineNuxtConfig({
           "type": "image/png",
           "purpose": "maskable"
         }
-      ]      
+      ],    
     },
     workbox: {
-      navigateFallback: '/'
+      navigateFallback: '/',
+      globPatterns: ['**/*.{js,css,html}'],
     },
     devOptions: {
       enabled: true,
