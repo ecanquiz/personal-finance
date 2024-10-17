@@ -18,6 +18,7 @@ export default defineNuxtConfig({
   // alias: { '@my-lib': './lib' },  
   compatibilityDate: '2024-04-03',
   //css: [`assets/styles/main.css`],
+  //css: [`assets/styles/main.min.css`],
   modules: [//'@nuxtjs/supabase',
   '@nuxt/ui',
   '@nuxtjs/tailwindcss', 
