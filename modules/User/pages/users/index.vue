@@ -27,9 +27,9 @@ const {
     <AppPageHeader> Usuarios </AppPageHeader>
 
     <div class="flex space-x-2">
-      <NuxtLink class="btn btn-primary" to="/users/create">
+      <!--NuxtLink class="btn btn-primary" to="/users/create">
         <span>Crear</span>
-      </NuxtLink>
+      </NuxtLink-->
     </div>    
     <div class="overflow-hidden panel mt-6">      
       <div class="mb-6 flex justify-between items-center">
