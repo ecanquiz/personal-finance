@@ -6,8 +6,8 @@ export default defineNuxtConfig({
     port: 3000, // 3000 by default, change to 80 to dev container
   },
   app: {
-    baseURL: '/',
-    //baseURL: '/personal-finance',
+    //baseURL: '/',
+    baseURL: '/personal-finance/',
     /*head: {
       htmlAttrs: {
         style: 'background-color: #111; color: #f0f0f0'
@@ -61,10 +61,11 @@ export default defineNuxtConfig({
           "type": "image/png",
           "purpose": "maskable"
         }
-      ]      
+      ],    
     },
     workbox: {
-      navigateFallback: '/'
+      navigateFallback: '/',
+      globPatterns: ['**/*.{js,css,html}'],
     },
     devOptions: {
       enabled: true,
