@@ -1,1 +1,0 @@
-import{_ as n}from"./DVhwEj5Z.js";import{e as t,o as _,f as a,w as s,b as c,_ as r}from"./DaC5EmkV.js";const u=t({__name:"dashboard",setup(m){return(p,f)=>{const o=n,e=r;return _(),a(e,null,{default:s(()=>[c(o)]),_:1})}}});export{u as default};
