@@ -1,0 +1,1 @@
+import{H as r}from"./_qxcC5gZ.js";const e=t=>r.put("/user/password",t),a=t=>r.post("/email/verification-notification",t),n=t=>r.put("/user/profile-information",t),o=()=>r.get("/api/users/auth-menu");export{e as a,o as g,a as s,n as u};
