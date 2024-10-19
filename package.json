@@ -1,32 +1,41 @@
 {
-  "name": "nuxt-app",
+  "name": "vue-perfin-pwa",
+  "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "generate-pwa-assets": "pwa-assets-generator --preset minimal public/logo.svg",
-    "deploy": "gh-pages --dotfiles -d .output/public",
-    "start": "node .output/server/index.mjs"
+    "dev": "vite",
+    "build": "run-p type-check build-only",
+    "preview": "vite preview",
+    "test:unit": "vitest",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal public/logo.png"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.18.7",
-    "@nuxtjs/tailwindcss": "^6.12.1",
-    "@pinia/nuxt": "^0.5.5",
-    "@supabase/supabase-js": "^2.45.4",
-    "axios": "^1.7.7",
-    "nuxt": "^3.13.0",
-    "pinia": "^2.2.4",
-    "vue": "latest",
-    "vue-router": "latest"
+    "@supabase/supabase-js": "^2.45.5",
+    "@vueuse/core": "^10.3.0",
+    "axios": "^1.4.0",
+    "pinia": "^2.1.4",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
-    "@vite-pwa/assets-generator": "^0.2.6",
-    "@vite-pwa/nuxt": "^0.10.5",
-    "gh-pages": "^6.2.0",
-    "nuxt-lodash": "^2.5.3"
+    "@tsconfig/node18": "^18.2.0",
+    "@types/jsdom": "^21.1.1",
+    "@types/node": "^18.17.0",
+    "@vite-pwa/assets-generator": "^0.0.4",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/test-utils": "^2.4.1",
+    "@vue/tsconfig": "^0.4.0",
+    "autoprefixer": "^10.4.14",
+    "jsdom": "^22.1.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3",
+    "typescript": "~5.1.6",
+    "vite": "^4.4.6",
+    "vite-plugin-pwa": "^0.16.4",
+    "vitest": "^0.33.0",
+    "vue-tsc": "^1.8.6"
   }
 }
