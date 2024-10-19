@@ -1,1 +1,1 @@
-if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/vue-perfin-pwa/sw.js', { scope: '/vue-perfin-pwa/' })})}
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/personal-finance/sw.js', { scope: '/personal-finance/' })})}
