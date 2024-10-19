@@ -5,7 +5,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/vue-perfin-pwa/',
+  base: '/personal-finance/',
   plugins: [
     vue(),
     VitePWA({
@@ -13,9 +13,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],     
       manifest: { 
-        name: 'My Awesome PWA',
-        short_name: 'MyPWA',
-        description: 'My Awesome Progressive Web Apps',
+        name: 'Personal Finance',
+        short_name: 'Perfin',
+        description: 'Personal Finance Apps',
         theme_color: '#ffffff',
         icons: [{
           src: 'pwa-64x64.png',
