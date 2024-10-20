@@ -20,6 +20,8 @@ onMounted(async () => await getMovements())
 
 <template>
   <div class="container mx-auto w-full lg:w-3/4">
+    <h1 v-if="pending" class="text-2xl" align="center">Loading...</h1>
+    <h1 v-else class="text-2xl" align="center">Movements List</h1>
     <table class="min-w-full text-left text-sm font-light">
       <thead class="border-b font-medium dark:border-neutral-500">
         <tr>          
