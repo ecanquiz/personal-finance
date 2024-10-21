@@ -7,9 +7,9 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 import type { Movement } from '../types'
 
 const { pending, tasks } = useIndex()
-const supabaseUrl = 'https://tojtdjayohnlrkqouhix.supabase.co'
-//const supabaseKey = process.env.SUPABASE_KEY as string
-const supabase: SupabaseClient = createClient(supabaseUrl, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRvanRkamF5b2hubHJrcW91aGl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg4NDkyNjIsImV4cCI6MjA0NDQyNTI2Mn0.h_HvRcbOS_2YDkSIL_d9k2U6wC7VZwOoA232OGYzIq4")
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL; 
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey)
 const movements: Ref<Movement[]> = ref([])
 const getMovements = async() => {
   const { data } = await supabase.from('movements').select()
