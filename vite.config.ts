@@ -52,7 +52,9 @@ export default defineConfig({
           },        
           {
             urlPattern: ({ url }) => {
-              return url.pathname.startsWith("/ecanquiz/vue-perfin-pwa");
+              // return url.pathname.startsWith("/ecanquiz/personal-finance");
+              return url.pathname.startsWith("/tojtdjayohnlrkqouhix.supabase.co");
+
             },
             //urlPattern: /^https:\/.my-json-server\.typicode\.com/,
             handler: "NetworkFirst" as const,
