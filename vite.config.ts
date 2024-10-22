@@ -51,10 +51,6 @@ export default defineConfig({
             }
           },        
           {
-            //urlPattern: ({ url }) => {
-              //return url.pathname.startsWith("/ecanquiz/personal-finance");
-              //return url.pathname.startsWith("/tojtdjayohnlrkqouhix.supabase.co");
-            //},
             urlPattern: /^https:\/\/tojtdjayohnlrkqouhix\.supabase\.co\/.*/,
             handler: "NetworkFirst" as const,
             method: 'GET',
