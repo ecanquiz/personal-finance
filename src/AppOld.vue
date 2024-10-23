@@ -1,15 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from "vue"
-import { useRouter } from "vue-router"
+import { computed, ref} from 'vue'
+import { RouterView } from 'vue-router'
 import { usePermission } from '@vueuse/core'
 
-const defaultLayout = "default"
-const { currentRoute } = useRouter()
-const layout = computed(
-  () => `${currentRoute.value.meta.layout || defaultLayout}-layout`
-)
-
-// Begings Notification logic
 const notifications = ref(
   usePermission('notifications')
 )
@@ -60,35 +53,16 @@ const notifyMe = () => {
 </script>
 
 <template>
+  <div class="m-10">
+    <header class="mx-auto w-full lg:w-3/4">
+      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    </header>
 
+    <RouterView />
 
-
-  <component :is="layout">
-    <router-view v-slot="{Component}">
-      <transition name="fade" mode="out-in">
-        <component :is="Component" :key="$route.path"></component>
-      </transition>
-    </router-view>
-  </component>
-
-
-
-
-
-  <div class="mx-auto w-full lg:w-3/4 mt-7">
+    <div class="mx-auto w-full lg:w-3/4 mt-7">
       <button v-if='!permission' class="btn btn-default" @click="notifyMe">Notify me!</button>
       <button v-else='permission' class="btn btn-default" @click="notifyMe">Try to notify me!</button>
+    </div>
   </div>
 </template>
-
-<style lang="css" scoped>
-  .fade-enter-active,
-  .fade-leave-active{
-    transition: opacity 0.3s;
-  }
-
-  .fade-enter-from,
-  .fade-leave-to{
-    opacity:0;
-  }
-</style>

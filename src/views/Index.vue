@@ -15,7 +15,7 @@ onMounted(
 </script>
 
 <template>
-  <div class="container mx-auto w-full lg:w-3/4">
+  <div class="container w-full lg:w-3/4">
     <h1 v-if="pending" class="text-2xl" align="center">Loading...</h1>
     <h1 v-else class="text-2xl" align="center">Movements List</h1>
     <table class="min-w-full text-left text-sm font-light">
