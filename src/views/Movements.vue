@@ -41,7 +41,7 @@ onMounted(
           <td class="p-2">          
             <router-link
               class="text-indigo-600 hover:text-indigo-800 underline"
-              :to="{ name: 'edit', params: { id: movement.id }}"               
+              :to="{ name: 'movements-edit', params: { id: movement.id }}"               
             >
               {{ movement.id }}
             </router-link>          
