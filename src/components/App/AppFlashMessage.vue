@@ -22,13 +22,14 @@ export default defineComponent({
     },
   },
   methods: {
-    getErrors(key) {
+    getErrors(key: string) {
+      // @ts-ignore
       return this.error[key];
     },
-    getType(obj) {
+    getType(obj: object|string) {
       return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
     },
-    filterTitleCase(value) {
+    filterTitleCase(value: string)  {
       return value.replace("_", " ");
     },
   }

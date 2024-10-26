@@ -15,7 +15,7 @@ export default defineConfig({
       manifest: { 
         name: 'Personal Finance',
         short_name: 'Perfin',
-        description: 'Personal Finance Apps',
+        description: 'Personal Finance PWA',
         theme_color: '#ffffff',
         icons: [{
           src: 'pwa-64x64.png',
