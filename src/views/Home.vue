@@ -15,19 +15,21 @@ import LandingImage from '@/components/App/LandingImage.vue'
             <p class="text-3xl justify-self-center">Finanzas Personales</p>
           </div>
           <div class="w-full wx-full wx-full mx-auto grid justify-items-stretch my-3">
-            <p class="text-lg dark:text-gray-300 justify-self-center">PWA <i>("Progressive Web Application")</i></p>
+            <p class="text-lg dark:text-gray-300 justify-self-center">PWA</p>
           </div>
-          <div class="flex justify-center text-lg my-10 space-x-5">
+          <div class="grid lg:grid-cols-2 gap-4 justify-center text-lg my-10 space-x-5">
+
+            
             <AppLink
               to="/login"
-              class="btn btn-primary"
+              class="btn btn-primary block m-auto"
               data-testid="login-link"
             >
               Iniciar Sesión
             </AppLink>
             <AppLink
               to="/register"
-              class="btn btn-default"
+              class="btn btn-default block m-auto"
               data-testid="register-link"
             >
               Registrarse
