@@ -1,12 +1,3 @@
-<template>
-  <div style="width: 400px">
-    <div style="display: flex; justify-content: center">
-      <button type="button" @click="shuffleData">Add data</button>
-    </div>
-    <DoughnutChart v-bind="doughnutChartProps" />
-  </div>
-</template>
-
 <script lang='ts'>
 import { computed, defineComponent, ref } from "vue";
 //import { shuffle } from "lodash";
@@ -90,6 +81,15 @@ export default defineComponent({
 });
 </script>
 
+<template>
+  <div class="m-auto" style="width: 90%;">
+    <div style="display: flex; justify-content: center">
+      <button type="button" @click="shuffleData">Add data</button>
+    </div>
+    <DoughnutChart v-bind="doughnutChartProps" />
+  </div>
+</template>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -97,6 +97,6 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /*margin-top: 60px;*/
 }
 </style>

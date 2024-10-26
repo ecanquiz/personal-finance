@@ -3,10 +3,10 @@
     <p class="text-gray-400">
       Full documentation for how this application is built can be found at
       <a
-        href="https://caribestic.github.io/laravuel-apispa/"
+        href="https://github.com/ecanquiz/personal-finance"
         class="base-link" target="_blank"
       >
-          <strong>caribestic.github.io/laravuel-apispa</strong>
+          <strong>github.com/ecanquiz/personal-finance</strong>
       </a>
     </p>
   </footer>

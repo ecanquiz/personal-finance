@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { useAuthStore } from "../stores"
-import ProfileUser from "../components/ProfileUser.vue"
-import ProfileUpdatePassword from "../components/ProfileUpdatePassword.vue"
-import ProfileVerifyEmail from "../components/ProfileVerifyEmail.vue"
-import ProfileFileUpload from "../components/ProfileFileUpload.vue"
-import AppSectionBorder from "@/components/AppSectionBorder.vue"
-import AppSectionInfo from "@/components/AppSectionInfo.vue"
+//import { useAuthStore } from "../stores"
+//import ProfileUser from "../components/ProfileUser.vue"
+//import ProfileUpdatePassword from "../components/ProfileUpdatePassword.vue"
+//import ProfileVerifyEmail from "../components/ProfileVerifyEmail.vue"
+//import ProfileFileUpload from "../components/ProfileFileUpload.vue"
+//import AppSectionBorder from "@/components/AppSectionBorder.vue"
+//import AppSectionInfo from "@/components/AppSectionInfo.vue"
 
-const store = useAuthStore()
+//const store = useAuthStore()
 
 const updateUser = () => {
-  store.getAuthUser()
+  //store.getAuthUser()
 }
 
 </script>
