@@ -15,10 +15,10 @@ onMounted(
 </script>
 
 <template>
-  <div class="container w-full lg:w-3/4">
+  <div class="table-data__wrapper">
     <h1 v-if="pending" class="text-2xl" align="center">Loading...</h1>
     <h1 v-else class="text-2xl" align="center">Movements List</h1>
-    <table class="min-w-full text-left text-sm font-light">
+    <table class="table-data">
       <thead class="border-b font-medium dark:border-neutral-500">
         <tr>          
           <th class="p-2">ID</th>

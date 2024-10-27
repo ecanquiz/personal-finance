@@ -14,6 +14,6 @@ app.component('AppBtn', defineAsyncComponent(() => import('@/components/App/AppB
 app.component('AppInput', defineAsyncComponent(() => import('@/components/App/AppInput.vue')))   
 app.component('AppErrorMessage', defineAsyncComponent(() => import('@/components/App/AppErrorMessage.vue')))
 app.component('AppFlashMessage', defineAsyncComponent(() => import('@/components/App/AppFlashMessage.vue')))   
-app.component('DefaultLayout', defineAsyncComponent(() => import('@/layouts/DashboardLayout.vue')))
+app.component('DefaultLayout', defineAsyncComponent(() => import('@/layouts/DefaultLayout.vue')))
 app.component('EmptyLayout', defineAsyncComponent(() => import('@/layouts/EmptyLayout.vue')))
 app.mount('#app')

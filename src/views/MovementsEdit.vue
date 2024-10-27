@@ -19,7 +19,7 @@ const {
         <div  class="flex space-x-2">
       <button
         class="btn btn-primary mb-4"
-        @click="router.push({ path: '/' })"
+        @click="router.push({ path: '/movements' })"
       >
         See all tasks
       </button>
