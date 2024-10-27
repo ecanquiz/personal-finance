@@ -1,0 +1,7 @@
+.panel {
+    @apply bg-white shadow sm:rounded px-4 py-4;
+}
+
+.section {
+    @apply flex justify-center min-h-screen;
+}
