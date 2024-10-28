@@ -1,17 +1,7 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import useMovements from '../composables/useMovements'
 
-const {
-  movements,
-  pending,
-
-  getMovements
-} = useMovements();
-
-onMounted(
-  async () => await getMovements()
-);
+const { movements, pending } = useMovements();
 </script>
 
 <template>
@@ -47,8 +37,8 @@ onMounted(
             </router-link>          
           </td>
           <td class="p-2">{{ movement.date }}</td>
-          <td class="p-2">{{ movement.type_id }}</td>
-          <td class="p-2">{{ movement.category }}</td>
+          <td class="p-2">{{ movement.type ? 'Ingreso' : 'Egreso' }}</td>
+          <td class="p-2">{{ movement.categories.name }}</td>
           <td class="p-2">{{ movement.concept }}</td>
           <td class="p-2">{{ movement.budget }}</td>
           <td class="p-2">{{ movement.amount }}</td>

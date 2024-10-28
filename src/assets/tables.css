@@ -1,5 +1,5 @@
 .table-data__wrapper {
-    @apply overflow-x-auto border shadow border-gray-200 sm:rounded;
+    @apply overflow-x-auto border shadow border-gray-100 sm:rounded;
 }
 .table-data {
     @apply min-w-full divide-y divide-gray-200;

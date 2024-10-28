@@ -1,5 +1,5 @@
 
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { supabaseClient } from '../libs/supabase'
 import type { Ref } from 'vue'
 import type { Movement } from '../types'
@@ -10,15 +10,13 @@ export default () => {
 
     const getMovements = async() => {
       pending.value = true;
-      const { data } = await supabaseClient.from('movements').select();
+      const { data } = await supabaseClient.from('movements').select(`*, categories (name)`);
       movements.value = data as Movement[];
+      console.log(movements.value)
       pending.value = false;  
     }
 
-    return {
-      movements,
-      pending,
+    onMounted( async () => await getMovements() );
 
-      getMovements
-    }
+    return { movements, pending }
 }
