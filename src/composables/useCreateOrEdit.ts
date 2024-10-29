@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { computed, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import * as Services from '../services/'

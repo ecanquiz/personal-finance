@@ -1,22 +1,39 @@
 
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { supabaseClient } from '../libs/supabase'
 import type { Ref } from 'vue'
 import type { Movement } from '../types'
-const movements: Ref<Movement[]> = ref([])
 
 export default () => {
+    const movement = ref<Movement>()
+    const movements: Ref<Movement[]> = ref([])
     const pending = ref(false);
 
-    const getMovements = async() => {
+    const getMovement = async(id?: string) => {
       pending.value = true;
-      const { data } = await supabaseClient.from('movements').select(`*, categories (name)`);
-      movements.value = data as Movement[];
-      console.log(movements.value)
+      const { data } = await supabaseClient
+          .from('movements')
+          .select(`*, categories (name)`).eq('id', id)
+          .single();          
+      movement.value = data as Movement;
       pending.value = false;  
     }
 
-    onMounted( async () => await getMovements() );
+    const getMovements = async() => {
+      pending.value = true;
+      const { data } = await supabaseClient
+          .from('movements')
+          .select(`*, categories (name)`);
+      movements.value = data as Movement[];
+      pending.value = false;  
+    }
 
-    return { movements, pending }
+    return {
+      movement,
+      movements,
+      pending,
+
+      getMovement,
+      getMovements
+    }
 }
