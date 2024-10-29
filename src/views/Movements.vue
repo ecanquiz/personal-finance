@@ -1,7 +1,14 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import useMovements from '../composables/useMovements'
 
-const { movements, pending } = useMovements();
+const {
+  movements,
+  pending,
+  getMovements
+} = useMovements();
+
+onMounted( async () => await getMovements() );
 </script>
 
 <template>

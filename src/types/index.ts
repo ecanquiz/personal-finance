@@ -1,11 +1,10 @@
-export type Task = {
-  id: number;
-  title: string;
-  description: string;
-  done: boolean;
-  deleted_at?: Date;
-  created_at: Date;
-  updated_at: Date;
+export type Props = {
+  readonly movement?: Record<string, any>;
+  readonly onSubmit?: ((...args: any[]) => any);
+}
+
+export type Category = {
+  name: string
 }
 
 export type Movement = {
@@ -19,8 +18,4 @@ export type Movement = {
   balance:     number;
   type:        boolean;
   categories:  Category;
-}
-
-export type Category = {
-  name: string
 }

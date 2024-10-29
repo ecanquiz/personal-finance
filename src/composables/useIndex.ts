@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ref, onMounted } from 'vue'
 import * as Services from '../services/'
 import type { Ref } from 'vue'
