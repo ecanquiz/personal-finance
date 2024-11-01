@@ -30,10 +30,16 @@ const router = createRouter({
     component: () => import('@/views/Movements.vue'),
 
   }, {
+    path: '/movements/create',      
+    name: 'movements-create',
+    meta: { layout: "default" },
+    component: () => import('@/views/MovementsCreateOrEdit.vue'),
+    props: false
+  }, {
     path: '/movements/edit/:id(\\d+)',      
     name: 'movements-edit',
     meta: { layout: "default" },
-    component: () => import('@/views/MovementsEdit.vue'),
+    component: () => import('@/views/MovementsCreateOrEdit.vue'),
     props: true
   }/*, {
     path: "/profile",
