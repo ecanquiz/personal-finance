@@ -12,9 +12,19 @@ onMounted( async () => await getMovements() );
 </script>
 
 <template>
+
+<div>
+  <h1 v-if="pending" class="text-2xl" align="center">Loading...</h1>
+  <h1 v-else class="text-2xl" align="center">Movements List</h1>
+
+  <div class="flex my-4">
+    <AppLink class="btn btn-primary" :to="`/movements/create`">
+      <span>Crear</span>
+    </AppLink>
+  </div>
+
   <div class="table-data__wrapper">
-    <h1 v-if="pending" class="text-2xl" align="center">Loading...</h1>
-    <h1 v-else class="text-2xl" align="center">Movements List</h1>
+
     <table class="table-data">
       <thead class="border-b font-medium dark:border-neutral-500">
         <tr>          
@@ -56,4 +66,7 @@ onMounted( async () => await getMovements() );
     </table>
     <h4 v-if="movements.length === 0">Empty list.</h4>
   </div>
+
+</div>
+
 </template>

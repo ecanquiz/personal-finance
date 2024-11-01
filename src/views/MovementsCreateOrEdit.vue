@@ -15,7 +15,9 @@ const {
   getMovement
 } = useMovements();
 
-onMounted( async () => await getMovement(props.id) ); 
+if (props && props.id) {
+  onMounted( async () => await getMovement(props.id) ); 
+}
 
 const isRenderable = computed(
   () => (props.id && movement.value && Object.keys(movement.value).length > 0 ) || props.id===undefined

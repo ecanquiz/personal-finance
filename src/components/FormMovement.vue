@@ -1,14 +1,29 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import useFormMovement from '@/composables/useFormMovement'
 import type { Movement } from '@/types'
 
 const props = defineProps<{ movement?: Movement }>()
 
 const { form } = useFormMovement(props)
+
+const pending = ref(false)
+const submit = ()=> {
+  pending.value = true
+  const myPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(
+        pending.value = false
+      );
+      alert('Saved successfully !!');
+    }, 300);
+  });
+  
+}
 </script>
 
 <template>
-  <form>
+  <form @submit.prevent="submit">
     <div class="grid lg:grid-cols-2 gap-4">
 
       <div class="block">
@@ -60,6 +75,16 @@ const { form } = useFormMovement(props)
         <label class="mr-2">Created at</label>
         <p> {{form.created_at }} </p>
       </div>
-    </div>    
+    </div>
+    
+    <button
+      class="btn btn-primary mt-5 justify-self-start"
+      type="submit"
+      :text="pending ? 'Guardando...' : 'Guardar'"
+      :isDisabled='pending'
+      @submit="submit()"    
+    >
+      {{ pending ? 'Guardando...' : 'Guardar'}}
+    </button>
   </form>
 </template>
