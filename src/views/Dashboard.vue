@@ -1,102 +1,53 @@
-<script lang='ts'>
-import { computed, defineComponent, ref } from "vue";
-//import { shuffle } from "lodash";
-import { DoughnutChart, useDoughnutChart } from "vue-chart-3";
-import { Chart,  registerables } from "chart.js";
-import type { ChartData, ChartOptions } from "chart.js";
+<script setup lang="ts">
+import {ref, onMounted} from 'vue';
+import Chart_1 from "@/components/dashboard/Chart_1.vue"
+import Chart_2 from "@/components/dashboard/Chart_2.vue"
+import Chart_3 from "@/components/dashboard/Chart_3.vue"
+import Chart_4 from "@/components/dashboard/Chart_4.vue"
+
+//const pickUp = ref([]);
+const pending = ref(false);
 
 
-Chart.register(...registerables);
-export default defineComponent({
-  name: "App",
-  components: { DoughnutChart },
-  setup() {
-    const dataValues = ref([30, 40, 60, 70, 5]);
-    const dataLabels = ref(["Paris", "Nîmes", "Toulon", "Perpignan", "Autre"]);
-    const toggleLegend = ref(true);
+onMounted(async () => {
+  pending.value=true
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(pending.value=false);
+    }, 300);
+  });
 
-    const testData = computed<ChartData<"doughnut">>(() => ({
-      labels: dataLabels.value,
-      datasets: [
-        {
-          data: dataValues.value,
-          backgroundColor: [
-            "#77CEFF",
-            "#0079AF",
-            "#123E6B",
-            "#97B0C4",
-            "#A5C8ED",
-          ],
-        },
-      ],
-    }));
+})
+/* v-if="pickUp && pickUp.length" */
 
-    const options = computed<ChartOptions<"doughnut">>(() => ({
-      scales: {
-        myScale: {
-          type: "logarithmic",
-          position: toggleLegend.value ? "left" : "right",
-        },
-      },
-      plugins: {
-        legend: {
-          position: toggleLegend.value ? "top" : "bottom",
-        },
-        title: {
-          display: true,
-          text: "Chart.js Doughnut Chart",
-        },
-      },
-    }));
-
-    const { doughnutChartProps, doughnutChartRef } = useDoughnutChart({
-      chartData: testData,
-      options,
-    });
-
-    let index = ref(20);
-
-    function shuffleData() {
-      // dataValues.value = shuffle(dataValues.value);
-      dataValues.value.push(index.value);
-      dataLabels.value.push("Other" + index.value);
-      console.log(dataValues.value);
-      console.log(doughnutChartRef.value ? doughnutChartRef.value.chartInstance: '');
-      index.value++;
-    }
-
-    function switchLegend() {
-      toggleLegend.value = !toggleLegend.value;
-    }
-
-    return {
-      shuffleData,
-      switchLegend,
-      testData,
-      options,
-      doughnutChartRef,
-      doughnutChartProps,
-    };
-  },
-});
+const backgroundColor = [ '#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED' ];
 </script>
-
 <template>
-  <div class="m-auto" style="width: 90%;">
-    <div style="display: flex; justify-content: center">
-      <button type="button" @click="shuffleData">Add data</button>
-    </div>
-    <DoughnutChart v-bind="doughnutChartProps" />
+<div>
+  <div class="w-full mb-10">
+    <h1 v-if="pending" class="text-2xl" align="center">Loading...</h1>
+    <h1 v-else class="text-2xl" align="center">Dashboard</h1>
   </div>
+  <div class="section" v-if="!pending">
+    <div class="flex flex-center column">
+      <div        
+        id="parent"
+        class="grid lg:grid-cols-2 gap-20"
+        style="overflow: hidden;"
+      >
+        <div class="block"><Chart_1 :backgroundColor="backgroundColor"/></div>
+        <div class="block"><Chart_4 :backgroundColor="backgroundColor"/></div>
+        <div class="block"><Chart_2 :backgroundColor="backgroundColor"/></div>
+        <div class="block"><Chart_3 :backgroundColor="backgroundColor"/></div>
+
+        <!--div class="block"><Chart_1 :pickUp="pickUp"/></div>
+        <div class="block"><Chart_4 :pickUp="pickUp"/></div>
+        <div class="block"><Chart_2 :pickUp="pickUp"/></div>
+        <div class="blockd"><Chart_3 :pickUp="pickUp"/></div-->
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
-<style scoped>
-#app {
-  /*font-family: Avenir, Helvetica, Arial, sans-serif;*/
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  /*margin-top: 60px;*/
-}
-</style>
+
