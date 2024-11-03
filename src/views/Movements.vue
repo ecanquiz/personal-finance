@@ -32,6 +32,7 @@ onMounted( async () => await getMovements() );
           <th class="p-2">DATE</th>
           <th class="p-2">MOVEMENT</th>
           <th class="p-2">CATEGORY</th>
+          <!--th class="p-2">SUBCATEGORY</th-->
           <th class="p-2">CONCEPT</th>
           <th class="p-2">BUDGET</th>
           <th class="p-2">AMOUNT</th>
@@ -54,7 +55,8 @@ onMounted( async () => await getMovements() );
             </router-link>          
           </td>
           <td class="p-2">{{ movement.date }}</td>
-          <td class="p-2">{{ movement.type ? 'Ingreso' : 'Egreso' }}</td>
+          <td class="p-2">{{ movement.type ? 'Income' : 'Expenses' }}</td>
+          <!--td class="p-2">{{ movement.categories.parent_id === 1 ? 'Income' : 'Expenses' }}</td-->
           <td class="p-2">{{ movement.categories.name }}</td>
           <td class="p-2">{{ movement.concept }}</td>
           <td class="p-2">{{ movement.budget }}</td>
