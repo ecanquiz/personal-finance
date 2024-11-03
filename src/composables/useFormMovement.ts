@@ -7,7 +7,7 @@ export default (props: Props) => {
     amount: 0,
     balance: 0,
     budget: 0,
-    categories: {name: ''},
+    categories: {name: '', parent_id: 0},
     category_id: 1,
     concept: "",
     created_at: new Date().toISOString() as unknown as Date,

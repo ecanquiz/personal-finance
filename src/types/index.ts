@@ -4,7 +4,8 @@ export type Props = {
 }
 
 export type Category = {
-  name: string
+  name: string;
+  parent_id: number;
 }
 
 export type Movement = {

@@ -3,8 +3,9 @@ import { ref, computed } from "vue";
 //import { useAuthStore } from "@/modules/Auth/stores"
 import { useSidebar } from "../composables/App/useSidebar"
 import Logout from "../components/App/Logout.vue"
+import HomeIcon from "../components/icons/HomeIcon.vue"
 //import LoginIcon from "@/icons/LoginIcon.vue"
-//import HomeIcon from "@/icons/HomeIcon.vue"
+
 //import SelectTheme from "./SelectTheme.vue"
 //import IconLogo from "@/icons/IconLogo.vue"
 

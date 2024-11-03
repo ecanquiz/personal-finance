@@ -23,8 +23,9 @@ export default () => {
       pending.value = true;
       const { data } = await supabaseClient
           .from('movements')
-          .select(`*, categories (name)`);
+          .select(`*, categories (name, parent_id)`);
       movements.value = data as Movement[];
+
       pending.value = false;  
     }
 
