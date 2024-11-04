@@ -7,7 +7,7 @@ export default (props: Props) => {
     amount: 0,
     balance: 0,
     budget: 0,
-    categories: {name: '', parent_id: 0},
+    categories: {id: 0, name: '', type: false},
     category_id: 1,
     concept: "",
     created_at: new Date().toISOString() as unknown as Date,
@@ -29,8 +29,7 @@ export default (props: Props) => {
     form.type= props.movement.type
   }
 
-
   //const form = ref(props.movement as Movement) 
-  console.log(toRaw(form))
+  //console.log(toRaw(form))
   return { form }
 }
