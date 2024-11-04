@@ -10,18 +10,30 @@ const props = defineProps<{
 }>()
 
 const {
+  categories,
   movement,
   pending,
-  getMovement
+  getMovement,
+  getCategories
 } = useMovements();
 
 if (props && props.id) {
-  onMounted( async () => await getMovement(props.id) ); 
+  onMounted(
+    async () => {
+      await getMovement(props.id)
+      if (movement.value ) {
+        await getCategories(movement.value.type)
+      }
+  }); 
+} else {
+  getCategories(false)
 }
 
 const isRenderable = computed(
   () => (props.id && movement.value && Object.keys(movement.value).length > 0 ) || props.id===undefined
 )
+
+
 </script>
 
 <template>
@@ -42,6 +54,7 @@ const isRenderable = computed(
 
     <FormMovement
       v-if="isRenderable"
+      :categories="categories"
       :movement="movement"
     />
 

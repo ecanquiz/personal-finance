@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import useFormMovement from '@/composables/useFormMovement'
-import type { Movement } from '@/types'
+import type { Category, Movement } from '@/types'
 
-const props = defineProps<{ movement?: Movement }>()
+const props = defineProps<{
+  categories: Category[]
+  movement?: Movement
+}>()
 
 const { form } = useFormMovement(props)
 
@@ -37,18 +40,37 @@ const submit = ()=> {
       </div>
 
       <div class="block">
-        <label class="mr-2">Movement</label>
-        <input type="checkbox" v-model="form.type"/>
+        <label class="block">Movement</label>
+        <div class="inline mr-2">
+          <input
+            type="radio"
+            v-model="form.type"
+            :value="true"
+            name="type"
+          />
+          <label class="ml-2">Income</label>
+        </div>
+        <div class="inline">
+          <input
+            type="radio"
+            v-model="form.type"
+            :value="false"
+            name="type"
+          />
+          <label class="ml-2">Expenses</label>
+        </div>
       </div>
 
       <div class="block">
-        <label class="mr-2">Category id</label>
-        <input type="text" v-model="form.category_id"/>
-      </div>
-
-      <div class="block">
-        <label class="mr-2">Category</label>
-        <input type="text" v-model="form.categories.name"/>
+        <label>Select a frequency</label>
+        <select v-model="form.category_id">
+          <option
+            v-for="option in categories"
+            :value="option.id"
+            :key="option.id"
+            :selected="option.id === form.category_id"
+          >{{ option.name }}</option>
+        </select>
       </div>
 
       <div class="block">
