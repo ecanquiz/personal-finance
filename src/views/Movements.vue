@@ -5,10 +5,16 @@ import useMovements from '../composables/useMovements'
 const {
   movements,
   pending,
-  getMovements
+  getMovements,
+  getMovementsByMonth
 } = useMovements();
 
-onMounted( async () => await getMovements() );
+onMounted( async () => {
+  await getMovements()
+  await getMovementsByMonth()
+});
+//onMounted( async () => await getMovements() );
+
 </script>
 
 <template>

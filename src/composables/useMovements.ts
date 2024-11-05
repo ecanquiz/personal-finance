@@ -53,6 +53,33 @@ export default () => {
       pending.value = false;  
     }
 
+    const getMovementsByMonth = async() => {
+      //https://vivasart.com/en/blog/grouping-data-in-supabase-a-beginners-guide-with-examples
+      /**
+       *  CREATE VIEW movements_by_month_view AS
+            SELECT
+            type,
+            SUM(amount), TO_CHAR(DATE(date), 'MM') AS mm,
+            TO_CHAR(DATE(date), 'Month') AS month
+            FROM movements 
+            GROUP by type, month, mm 
+            ORDER BY mm;
+
+          select * from movements_by_month_view
+       */
+      pending.value = true;           
+      const { data, error } = await supabaseClient
+        .from('movements_by_month_view')
+        .select(`*`);
+
+        if (error) {
+          console.error('Error fetching data:', error);
+        } else {
+          console.log('Data:', data);
+        }
+      pending.value = false;  
+    }
+
     return {
       categories,
       movement,
@@ -61,6 +88,7 @@ export default () => {
 
       getCategories,
       getMovement,
-      getMovements
+      getMovements,
+      getMovementsByMonth
     }
 }
