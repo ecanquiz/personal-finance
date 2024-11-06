@@ -1,27 +1,42 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, toRaw } from 'vue'
 import useFormMovement from '@/composables/useFormMovement'
-import type { Category, Movement } from '@/types'
+import type { Movement } from '@/types'
 
 const props = defineProps<{
-  categories: Category[]
-  movement?: Movement
+  movement?: Movement,
+  pending: boolean
 }>()
 
-const { form } = useFormMovement(props)
+const {
+  categories,  
+  form,
+  pending: loading,
 
-const pending = ref(false)
-const submit = ()=> {
-  pending.value = true
-  const myPromise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(
-        pending.value = false
-      );
-      alert('Saved successfully !!');
-    }, 300);
-  });
-  
+  getCategories
+} = useFormMovement(props)
+
+onMounted(
+  async () => {
+    if (props && props.movement ) {
+        await getCategories(props.movement.type)
+    } else {
+      getCategories(false)
+    }
+  }
+); 
+
+const changeCategories = (type: boolean): void => {
+  form.category_id = 0;
+  getCategories(type);
+}
+
+const emit = defineEmits<{
+  (e: 'submit', form: Movement): void
+}>()
+
+const submit = () => {
+  emit('submit', toRaw(form))
 }
 </script>
 
@@ -47,6 +62,7 @@ const submit = ()=> {
             v-model="form.type"
             :value="true"
             name="type"
+            @click="changeCategories(true)"
           />
           <label class="ml-2">Income</label>
         </div>
@@ -56,6 +72,7 @@ const submit = ()=> {
             v-model="form.type"
             :value="false"
             name="type"
+            @click="changeCategories(false)"
           />
           <label class="ml-2">Expenses</label>
         </div>
@@ -106,7 +123,7 @@ const submit = ()=> {
       :isDisabled='pending'
       @submit="submit()"    
     >
-      {{ pending ? 'Guardando...' : 'Guardar'}}
+      {{ props.pending ? 'Guardando...' : 'Guardar'}}
     </button>
   </form>
 </template>
