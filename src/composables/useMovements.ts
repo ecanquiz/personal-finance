@@ -7,18 +7,7 @@ import type { Movement, Category } from '../types'
 export default () => {
     const movement = ref<Movement>()
     const movements: Ref<Movement[]> = ref([])
-    const categories = ref<Category[]>([])
     const pending = ref(false);
-
-    const getCategories = async(type = false) => {
-      pending.value = true;
-      const { data } = await supabaseClient
-        .from('categories')
-        .select(`id, name`)
-        .eq('type', type);          
-      categories.value = data as Category[];
-      pending.value = false;  
-    }
 
     const getMovement = async(id?: string) => {
       pending.value = true;
@@ -81,12 +70,10 @@ export default () => {
     }
 
     return {
-      categories,
       movement,
       movements,
       pending,
 
-      getCategories,
       getMovement,
       getMovements,
       getMovementsByMonth
