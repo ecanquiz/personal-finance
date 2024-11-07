@@ -33,7 +33,7 @@ onMounted( async () => {
     <table class="table-data">
       <thead class="border-b font-medium dark:border-neutral-500">
         <tr>          
-          <th class="p-2">ID</th>
+          <th class="p-2">NUMBER</th>
           <th class="p-2">DATE</th>
           <th class="p-2">MOVEMENT</th>
           <th class="p-2">CATEGORY</th>
@@ -47,7 +47,7 @@ onMounted( async () => {
       </thead>
       <tbody>
         <tr
-          v-for="movement in movements"
+          v-for="movement in movements.reverse()"
           :key="movement.id"
           class="border-b dark:border-neutral-500"
         >          
@@ -56,18 +56,18 @@ onMounted( async () => {
               class="text-indigo-600 hover:text-indigo-800 underline"
               :to="{ name: 'movements-edit', params: { id: movement.id }}"               
             >
-              {{ movement.id }}
+              {{ movement.number }}
             </router-link>          
           </td>
           <td class="p-2">{{ movement.date }}</td>
           <td class="p-2">{{ movement.type ? 'Income' : 'Expenses' }}</td>
           <!--td class="p-2">{{ movement.categories.parent_id === 1 ? 'Income' : 'Expenses' }}</td-->
-          <td class="p-2">{{ movement.categories.name }}</td>
+          <td class="p-2">{{ movement.categories!.name }}</td>
           <td class="p-2">{{ movement.concept }}</td>
           <td class="p-2">{{ movement.budget }}</td>
           <td class="p-2">{{ movement.amount }}</td>
           <td class="p-2">{{ movement.balance }}</td>
-          <td class="p-2">{{ movement.created_at.toString().substring(0,16) }}</td>
+          <td class="p-2">{{ movement.created_at!.toString().substring(0,16) }}</td>
         </tr>
       </tbody>
     </table>

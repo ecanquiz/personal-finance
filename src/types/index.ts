@@ -10,14 +10,15 @@ export type Category = {
 }
 
 export type Movement = {
-  id:          number;
-  created_at:  Date;
+  id?:          number;
+  number:      string;
+  created_at?:  Date;
   date:        Date;
   category_id: number;
   concept:     string;
   budget:      number;
   amount:      number;
-  balance:     number;
+  balance?:     number;
   type:        boolean;
-  categories:  Category;
+  categories?:  Category;
 }

@@ -36,23 +36,25 @@ const emit = defineEmits<{
 }>()
 
 const submit = () => {
-  emit('submit', toRaw(form))
+
+const xxx={
+    number:      form.number,
+    date:        form.date,
+    category_id: form.category_id,
+    concept:     form.concept,
+    budget:      form.budget,
+    amount:      form.amount,
+    type:        form.type,
+  }
+  
+
+  emit('submit', xxx)
 }
 </script>
 
 <template>
   <form @submit.prevent="submit">
     <div class="grid lg:grid-cols-2 gap-4">
-
-      <div class="block">
-        <label>Id</label>
-        <input type="text" v-model="form.id" />
-      </div>
-
-      <div class="block">
-        <label>Date</label>
-        <input type="text" v-model="form.date" />
-      </div>
 
       <div class="block">
         <label class="block">Movement</label>
@@ -76,6 +78,17 @@ const submit = () => {
           />
           <label class="ml-2">Expenses</label>
         </div>
+      </div>
+
+      <div class="block mr-2">
+        <input type="hidden" v-model="form.id" />
+        <label class="block mb-2">Number</label>
+        <span class="border border-gray-300 pl-2 py-2 bg-gray-100 text-gray-400" style="padding-right: 69%;" >{{ form.number }}</span>
+      </div>
+
+      <div class="block">
+        <label>Date</label>
+        <input type="text" v-model="form.date" />
       </div>
 
       <div class="block">
@@ -105,15 +118,15 @@ const submit = () => {
         <input type="text" v-model="form.amount"/>
       </div>
 
-      <div class="block">
+      <!--div class="block">
         <label class="mr-2">Balance</label>
         <input type="text" v-model="form.balance"/>
-      </div>
+      </div-->
 
-      <div class="block">
+      <!--div class="block">
         <label class="mr-2">Created at</label>
         <p> {{form.created_at }} </p>
-      </div>
+      </div-->
     </div>
     
     <button

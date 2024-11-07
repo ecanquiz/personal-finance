@@ -3,6 +3,8 @@ import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import useMovements from '@/composables/useMovements'
 import FormMovement from '@/components/FormMovement.vue'
+import type { Movement } from '@/types'
+
 
 const router = useRouter()
 const props = defineProps<{
@@ -14,6 +16,7 @@ const {
   pending,
 
   getMovement,
+  submit
 } = useMovements();
 
 if (props && props.id) {
@@ -26,18 +29,6 @@ if (props && props.id) {
 const isRenderable = computed(
   () => (props.id && movement.value && Object.keys(movement.value).length > 0 ) || props.id===undefined
 )
-
-const submit = (): void => {
-  pending.value = true
-  const myPromise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(
-        pending.value = false
-      );
-      alert('Saved successfully !!');
-    }, 300);
-  });  
-}
 </script>
 
 <template>

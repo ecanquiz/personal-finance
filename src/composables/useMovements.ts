@@ -1,10 +1,13 @@
 
 import { ref } from 'vue'
+import {useRouter} from 'vue-router'
 import { supabaseClient } from '../libs/supabase'
 import type { Ref } from 'vue'
 import type { Movement, Category } from '../types'
 
+
 export default () => {
+    const router = useRouter();
     const movement = ref<Movement>()
     const movements: Ref<Movement[]> = ref([])
     const pending = ref(false);
@@ -43,19 +46,6 @@ export default () => {
     }
 
     const getMovementsByMonth = async() => {
-      //https://vivasart.com/en/blog/grouping-data-in-supabase-a-beginners-guide-with-examples
-      /**
-       *  CREATE VIEW movements_by_month_view AS
-            SELECT
-            type,
-            SUM(amount), TO_CHAR(DATE(date), 'MM') AS mm,
-            TO_CHAR(DATE(date), 'Month') AS month
-            FROM movements 
-            GROUP by type, month, mm 
-            ORDER BY mm;
-
-          select * from movements_by_month_view
-       */
       pending.value = true;           
       const { data, error } = await supabaseClient
         .from('movements_by_month_view')
@@ -69,6 +59,32 @@ export default () => {
       pending.value = false;  
     }
 
+    const submit = async (payload: Movement): Promise<void> => {
+      pending.value = true
+      const { error } = await supabaseClient
+        .from('movements')
+        .insert(payload)
+      
+      if (error) {
+        console.error('Error inserting data:', error);
+      }
+      else {
+        alert('Record inserted successfully.');
+        router.push('/movements');
+      } 
+      pending.value = false;
+
+      /*const myPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(
+            pending.value = false
+          );
+          alert('Saved successfully !!');
+          console.log('payload', payload)
+        }, 300);
+      }); */ 
+    }
+
     return {
       movement,
       movements,
@@ -76,6 +92,7 @@ export default () => {
 
       getMovement,
       getMovements,
-      getMovementsByMonth
+      getMovementsByMonth,
+      submit
     }
 }
