@@ -7,6 +7,7 @@ export default (props: Props) => {
   const pending = ref(false);
 
   const form = reactive<Movement>({
+    number: '',
     amount: 0,
     balance: 0,
     budget: 0,
@@ -20,16 +21,17 @@ export default (props: Props) => {
   })
 
   if (props && props.movement) {
-    form.amount= props.movement.amount
-    form.balance= props.movement.balance
-    form.budget= props.movement.budget
-    form.categories= props.movement.categories
-    form.category_id= props.movement.category_id
-    form.concept= props.movement.concept
-    form.created_at= props.movement.created_at
-    form.date= props.movement.date
-    form.id= props.movement.id
-    form.type= props.movement.type
+    form.number= props.movement.number;
+    form.amount= props.movement.amount;
+    form.balance= props.movement.balance;
+    form.budget= props.movement.budget;
+    form.categories= props.movement.categories;
+    form.category_id= props.movement.category_id;
+    form.concept= props.movement.concept;
+    form.created_at= props.movement.created_at;
+    form.date= props.movement.date;
+    form.id= props.movement.id;
+    form.type= props.movement.type;
   }
 
   const getCategories = async(type = false) => {
