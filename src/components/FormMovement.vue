@@ -32,12 +32,11 @@ const changeCategories = (type: boolean): void => {
 }
 
 const emit = defineEmits<{
-  (e: 'submit', form: Movement): void
+  (e: 'submit', form: Movement, movementId?: number): void
 }>()
 
 const submit = () => {
-
-const xxx={
+  emit('submit', {
     number:      form.number,
     date:        form.date,
     category_id: form.category_id,
@@ -45,10 +44,7 @@ const xxx={
     budget:      form.budget,
     amount:      form.amount,
     type:        form.type,
-  }
-  
-
-  emit('submit', xxx)
+  }, props.movement!.id)
 }
 </script>
 

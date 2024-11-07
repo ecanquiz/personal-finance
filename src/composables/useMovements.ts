@@ -59,11 +59,11 @@ export default () => {
       pending.value = false;  
     }
 
-    const submit = async (payload: Movement): Promise<void> => {
+    const insertMovement = async (payload: Movement): Promise<void> => {
       pending.value = true
       const { error } = await supabaseClient
         .from('movements')
-        .insert(payload)
+        .insert(payload);
       
       if (error) {
         console.error('Error inserting data:', error);
@@ -73,16 +73,27 @@ export default () => {
         router.push('/movements');
       } 
       pending.value = false;
+    }
 
-      /*const myPromise = new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(
-            pending.value = false
-          );
-          alert('Saved successfully !!');
-          console.log('payload', payload)
-        }, 300);
-      }); */ 
+    const updateMovement = async (payload: Movement, id: number): Promise<void> => {
+      pending.value = true      
+      const { error } = await supabaseClient
+        .from('movements')
+        .update(payload)
+        .eq('id', id);
+      
+      if (error) {
+        console.error('Error updating data:', error);
+      }
+      else {
+        alert('Record updating successfully.');
+        router.push('/movements');
+      } 
+      pending.value = false;
+    }
+
+    const submit = (movement: Movement, movementId?: number) => {  
+      !movementId ? insertMovement(movement)  : updateMovement(movement, movementId)
     }
 
     return {
