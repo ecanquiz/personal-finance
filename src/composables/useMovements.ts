@@ -86,14 +86,14 @@ export default () => {
         console.error('Error updating data:', error);
       }
       else {
-        alert('Record updating successfully.');
+        alert('Record updated successfully.');
         router.push('/movements');
       } 
       pending.value = false;
     }
 
     const submit = (movement: Movement, movementId?: number) => {  
-      !movementId ? insertMovement(movement)  : updateMovement(movement, movementId)
+      !movementId ? insertMovement(movement) : updateMovement(movement, movementId)
     }
 
     return {

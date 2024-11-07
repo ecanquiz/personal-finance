@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, toRaw } from 'vue'
+import { onMounted } from 'vue'
 import useFormMovement from '@/composables/useFormMovement'
 import type { Movement } from '@/types'
 
@@ -19,9 +19,9 @@ const {
 onMounted(
   async () => {
     if (props && props.movement ) {
-        await getCategories(props.movement.type)
+      await getCategories(props.movement.type)
     } else {
-      getCategories(false)
+      await getCategories(false)
     }
   }
 ); 
@@ -113,16 +113,6 @@ const submit = () => {
         <label class="mr-2">Amount</label>
         <input type="text" v-model="form.amount"/>
       </div>
-
-      <!--div class="block">
-        <label class="mr-2">Balance</label>
-        <input type="text" v-model="form.balance"/>
-      </div-->
-
-      <!--div class="block">
-        <label class="mr-2">Created at</label>
-        <p> {{form.created_at }} </p>
-      </div-->
     </div>
     
     <button
