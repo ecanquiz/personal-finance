@@ -26,21 +26,34 @@ export default () => {
       pending.value = true;
       const balance = ref(0)
 
-      const { data } = await supabaseClient
-        .from('movements')
-        .select(`*, categories (name, type)`);
-      
-      movements.value = (data as Movement[])
-        .map((movement)=> {
-          balance.value = movement.type 
-            ? movement.amount + balance.value
-            : balance.value - movement.amount;
+      const { data, error } = await supabaseClient
+        .from('movements_view')
+        .select(`*`)
+        .order('id') //, { ascending: false }
+        //.eq('month', '11')
+        //.range(0,4);
 
-          return {
-            ...movement,
-            balance: balance.value
-          }
-        })
+        if (error) {
+          console.error('Error fetching data:', error);
+        } else {
+          console.log('DataBefore:', data);
+          movements.value = (data as Movement[])
+          .map((movement)=> {
+            if (movement.movement_type==='Income') {
+              balance.value = movement.amount + balance.value
+            } else if (movement.movement_type==='Expenses') {
+              balance.value = balance.value - movement.amount
+            }
+  
+            return {
+              ...movement,
+              balance: balance.value
+            }
+          })
+          console.log('DataAfter:', movements.value);
+        }
+      
+
 
       pending.value = false;  
     }

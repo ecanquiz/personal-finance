@@ -15,10 +15,12 @@ export type Movement = {
   created_at?:  Date;
   date:        Date;
   category_id: number;
+  category?:   string;
   concept:     string;
   budget:      number;
   amount:      number;
   balance?:     number;
-  type:        boolean;
+  type?:        boolean;
+  movement_type?: 'Income' | 'Expenses';
   categories?:  Category;
 }
