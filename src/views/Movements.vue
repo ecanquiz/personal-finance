@@ -7,12 +7,12 @@ const {
   pending,
 
   getMovements,
-  getMovementsByMonth
+  //getMovementsByMonth
 } = useMovements();
 
 onMounted( async () => {
   await getMovements()
-  await getMovementsByMonth()
+  //await getMovementsByMonth()
 });
 </script>
 
@@ -41,7 +41,7 @@ onMounted( async () => {
           <th class="p-2">BUDGET</th>
           <th class="p-2">AMOUNT</th>
           <th class="p-2">BALANCE</th>
-          <th class="p-2">CREATED_AT</th>
+          <!--th class="p-2">CREATED_AT</th-->
         </tr>
       </thead>
       <tbody>
@@ -59,13 +59,13 @@ onMounted( async () => {
             </router-link>          
           </td>
           <td class="p-2">{{ movement.date }}</td>
-          <td class="p-2">{{ movement.type ? 'Income' : 'Expenses' }}</td>
-          <td class="p-2">{{ movement.categories!.name }}</td>
+          <td class="p-2">{{ movement.movement_type }}</td>
+          <td class="p-2">{{ movement.category }}</td>
           <td class="p-2">{{ movement.concept }}</td>
           <td class="p-2">{{ movement.budget }}</td>
           <td class="p-2">{{ movement.amount }}</td>
           <td class="p-2">{{ movement.balance }}</td>
-          <td class="p-2">{{ movement.created_at!.toString().substring(0,16) }}</td>
+          <!--td class="p-2">{{ movement.created_at!.toString().substring(0,16) }}</td-->
         </tr>
       </tbody>
     </table>
