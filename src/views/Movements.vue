@@ -51,7 +51,7 @@ const formatTime = (moment: Date) => moment.toString().substring(0,16).split('T'
       </thead>
       <tbody>
         <tr
-          v-for="movement in movements.reverse()"
+          v-for="movement in movements"
           :key="movement.id"
           class="border-b dark:border-neutral-500"
         >          
