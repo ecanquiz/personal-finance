@@ -10,17 +10,20 @@ export type Category = {
 }
 
 export type Movement = {
-  id?:          number;
-  number:      string;
-  created_at?:  Date;
-  date:        Date;
+  id?: number;
+  number: string;
+  created_at: Date;
+  moment: Date;
   category_id: number;
-  category?:   string;
-  concept:     string;
-  budget:      number;
-  amount:      number;
-  balance?:     number;
-  type?:        boolean;
-  movement_type?: 'Income' | 'Expenses';
-  categories?:  Category;
+  category?: string;
+  concept: string;
+  budget: number;
+  amount: number;
+  balance: number;
+  //movement_type?: boolean;
+  movement_type: boolean;
+  //categories?: Category;
 }
+
+export type MovementForm = Omit<Movement, 'created_at'| 'balance'>
+

@@ -11,13 +11,13 @@ export default (props: Props) => {
     amount: 0,
     balance: 0,
     budget: 0,
-    categories: {id: 0, name: '', type: false},
+    //categories: {id: 0, name: '', type: false},
     category_id: 0,
     concept: "",
     created_at: new Date().toISOString() as unknown as Date,
-    date: new Date().toISOString().slice(0, 10) as unknown as Date,
+    moment: new Date().toISOString() as unknown as Date,
     id: 0,
-    type: false
+    movement_type: false
   })
 
   if (props && props.movement) {
@@ -25,13 +25,13 @@ export default (props: Props) => {
     form.amount= props.movement.amount;
     form.balance= props.movement.balance;
     form.budget= props.movement.budget;
-    form.categories= props.movement.categories;
+    //form.categories= props.movement.categories;
     form.category_id= props.movement.category_id;
     form.concept= props.movement.concept;
     form.created_at= props.movement.created_at;
-    form.date= props.movement.date;
+    form.moment= props.movement.moment;
     form.id= props.movement.id;
-    form.type= props.movement.type;
+    form.movement_type= props.movement.movement_type;
   }
 
   const getCategories = async(type = false) => {
