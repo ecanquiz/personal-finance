@@ -24,8 +24,6 @@ export default () => {
 
     const getMovements = async() => {
       pending.value = true;
-      const balance = ref(0)
-
       const { data, error } = await supabaseClient
         .from('movements_view')
         .select(`*`)
@@ -33,29 +31,11 @@ export default () => {
         //.eq('month', '11')
         //.range(0,4);
 
-        if (error) {
-          console.error('Error fetching data:', error);
-        } else {
-          console.log('DataBefore:', data);
-          movements.value = data;
-          /*(data as Movement[])
-          .map((movement)=> {
-            if (movement.movement_type==='Income') {
-              balance.value = movement.amount + balance.value
-            } else if (movement.movement_type==='Expenses') {
-              balance.value = balance.value - movement.amount
-            }
-  
-            return {
-              ...movement,
-              balance: balance.value
-            }
-          })*/
-          console.log('DataAfter:', movements.value);
-        }
-      
-
-
+      if (error) {
+        console.error('Error fetching data:', error);
+      } else {
+        movements.value = (data as unknown as Movement[]).reverse();
+      }
       pending.value = false;  
     }
 
