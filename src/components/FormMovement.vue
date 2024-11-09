@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import useFormMovement from '@/composables/useFormMovement'
-import type { Movement } from '@/types'
+import type { MovementForm } from '@/types'
 
 const props = defineProps<{
-  movement?: Movement,
+  movement?: MovementForm,
   pending: boolean
 }>()
 
@@ -19,7 +19,7 @@ const {
 onMounted(
   async () => {
     if (props && props.movement ) {
-      await getCategories(props.movement.type)
+      await getCategories(props.movement.movement_type)
     } else {
       await getCategories(false)
     }
@@ -32,19 +32,19 @@ const changeCategories = (type: boolean): void => {
 }
 
 const emit = defineEmits<{
-  (e: 'submit', form: Movement, movementId?: number): void
+  (e: 'submit', form: MovementForm, movementId?: number): void
 }>()
 
 const submit = () => {
   emit('submit', {
-    number:      form.number,
-    date:        form.date,
+    number: form.number,
+    moment: form.moment,
     category_id: form.category_id,
-    concept:     form.concept,
-    budget:      form.budget,
-    amount:      form.amount,
-    type:        form.type,
-  }, props.movement!.id)
+    concept: form.concept,
+    budget: form.budget,
+    amount: form.amount,
+    movement_type: form.movement_type,
+  }, props.movement ? props.movement!.id : undefined)
 }
 </script>
 
@@ -57,7 +57,7 @@ const submit = () => {
         <div class="inline mr-2">
           <input
             type="radio"
-            v-model="form.type"
+            v-model="form.movement_type"
             :value="true"
             name="type"
             @click="changeCategories(true)"
@@ -67,7 +67,7 @@ const submit = () => {
         <div class="inline">
           <input
             type="radio"
-            v-model="form.type"
+            v-model="form.movement_type"
             :value="false"
             name="type"
             @click="changeCategories(false)"
@@ -84,7 +84,7 @@ const submit = () => {
 
       <div class="block">
         <label>Date</label>
-        <input type="text" v-model="form.date" />
+        <input type="text" v-model="form.moment" />
       </div>
 
       <div class="block">

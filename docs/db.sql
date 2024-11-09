@@ -1,15 +1,42 @@
 -- https://vivasart.com/en/blog/grouping-data-in-supabase-a-beginners-guide-with-examples
 -- view
-CREATE VIEW movements_by_month_view AS
-            SELECT
-            type,
-            SUM(amount), TO_CHAR(DATE(date), 'MM') AS mm,
-            TO_CHAR(DATE(date), 'Month') AS month
-            FROM movements 
-            GROUP by type, month, mm 
-            ORDER BY mm;
+create view movements_view as
+  select
+    m.id,
+    m.number,
+    m.moment,
+    m.movement_type,
+    m.category_id,
+    c.name as category,
+    m.concept,
+    m.budget,
+    m.amount,
+    m.balance,
+    m.created_at,
+    m.updated_at,
+    m.deleted_at
+  from movements m
+  inner join categories c
+    on m.category_id = c.id;
 
-          select * from movements_by_month_view
+--select * from movements_view
+-- DROP VIEW IF EXISTS movements_view;
+
+-- view
+  -- view
+create or replace view movements_by_mont_of_year_view as
+  select
+    movement_type,
+    SUM(amount) as amount_tot,
+    to_char(date(moment), 'YYYY') as year,
+    to_char(date(moment), 'MM') as mm,
+    trim(to_char(date(moment), 'Month')) as month
+
+  from movements 
+  group by movement_type, year, mm, month 
+  order by year, mm, month;
+
+select * from movements_by_mont_of_year_view;
 
 --trigger
 create or replace function movements_generate_number()

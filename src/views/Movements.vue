@@ -14,6 +14,10 @@ onMounted( async () => {
   await getMovements()
   //await getMovementsByMonth()
 });
+
+const formatDate = (moment: Date) => moment.toString().substring(0,16).split('T')[0]
+const formatTime = (moment: Date) => moment.toString().substring(0,16).split('T')[1]
+
 </script>
 
 <template>
@@ -35,6 +39,7 @@ onMounted( async () => {
         <tr>          
           <th class="p-2">NUMBER</th>
           <th class="p-2">DATE</th>
+          <th class="p-2">TIME</th>
           <th class="p-2">MOVEMENT</th>
           <th class="p-2">CATEGORY</th>
           <th class="p-2">CONCEPT</th>
@@ -58,7 +63,8 @@ onMounted( async () => {
               {{ movement.number }}
             </router-link>          
           </td>
-          <td class="p-2">{{ movement.date }}</td>
+          <td class="p-2">{{ formatDate(movement.moment) }}</td>
+          <td class="p-2">{{ formatTime(movement.moment) }}</td>
           <td class="p-2">{{ movement.movement_type }}</td>
           <td class="p-2">{{ movement.category }}</td>
           <td class="p-2">{{ movement.concept }}</td>

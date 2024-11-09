@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import {useRouter} from 'vue-router'
 import { supabaseClient } from '../libs/supabase'
 import type { Ref } from 'vue'
-import type { Movement, Category } from '../types'
+import type { Movement, MovementForm } from '../types'
 
 
 export default () => {
@@ -37,7 +37,8 @@ export default () => {
           console.error('Error fetching data:', error);
         } else {
           console.log('DataBefore:', data);
-          movements.value = (data as Movement[])
+          movements.value = data;
+          /*(data as Movement[])
           .map((movement)=> {
             if (movement.movement_type==='Income') {
               balance.value = movement.amount + balance.value
@@ -49,7 +50,7 @@ export default () => {
               ...movement,
               balance: balance.value
             }
-          })
+          })*/
           console.log('DataAfter:', movements.value);
         }
       
@@ -72,7 +73,7 @@ export default () => {
       pending.value = false;  
     }
 
-    const insertMovement = async (payload: Movement): Promise<void> => {
+    const insertMovement = async (payload: MovementForm): Promise<void> => {
       pending.value = true
       const { error } = await supabaseClient
         .from('movements')
@@ -88,7 +89,7 @@ export default () => {
       pending.value = false;
     }
 
-    const updateMovement = async (payload: Movement, id: number): Promise<void> => {
+    const updateMovement = async (payload: MovementForm, id: number): Promise<void> => {
       pending.value = true      
       const { error } = await supabaseClient
         .from('movements')
@@ -105,7 +106,7 @@ export default () => {
       pending.value = false;
     }
 
-    const submit = (movement: Movement, movementId?: number) => {  
+    const submit = (movement: MovementForm, movementId?: number) => {    
       !movementId ? insertMovement(movement) : updateMovement(movement, movementId)
     }
 
