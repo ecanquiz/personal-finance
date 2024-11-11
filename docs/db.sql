@@ -83,13 +83,12 @@ create or replace view movements_view AS
 
     --cursor
    --date timestamp with time zone,
-
-    create
-or replace function movements_with_balances( mm varchar ) returns table (
+-- Use DROP FUNCTION movements_with_balances(integer,character varying)
+create or replace function movements_with_balances( yyyy integer, mm character varying ) returns table (
     id bigint,
     number character varying,
-    date date,
-    movement_type text,
+    moment timestamp with time zone,
+    movement_type boolean,
     category character varying,
     concept character varying,
     budget double precision,
@@ -103,22 +102,22 @@ DECLARE
 BEGIN 
 
     FOR record IN
-        SELECT 
-            mv.id, mv.number, mv.date, mv.movement_type, mv.category, mv.concept, mv.budget, mv.amount 
+        SELECT mv.id, mv.number, mv.moment, mv.movement_type, mv.category, mv.concept, mv.budget, mv.amount 
         FROM  movements_view as mv
-        --WHERE mv.month = mm
+        WHERE to_char(mv.moment, 'yyyy')::integer = yyyy and to_char(mv.moment, 'mm') = mm
+
         ORDER BY id
     LOOP
-        IF record.movement_type='Income' THEN
+        IF record.movement_type=true THEN
             accumulated_balance := accumulated_balance + record.amount;
-        ELSEIF record.movement_type='Expenses' THEN
+        ELSEIF record.movement_type=false THEN
             accumulated_balance := accumulated_balance - record.amount;
         END IF;
 
         RETURN QUERY SELECT
             record.id,
             record.number,
-            record.date,
+            record.moment,
             record.movement_type,
             record.category,
             record.concept,
@@ -126,11 +125,12 @@ BEGIN
             record.amount,
             accumulated_balance;
 
-
     END LOOP;
     RETURN;
 END;
 $$ language plpgsql;
+
+-- select movements_with_balances(2024, '11')
 
 
 --movements
