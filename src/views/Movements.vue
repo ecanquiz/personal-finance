@@ -15,9 +15,9 @@ onMounted( async () => {
   //await getMovementsByMonth()
 });
 
-const formatDate = (moment: Date) => moment.toString().substring(0,16).split('T')[0]
-const formatTime = (moment: Date) => moment.toString().substring(0,16).split('T')[1]
-
+const formatDate = (moment: Date) => moment.toString().substring(0,16).split('T')[0];
+const formatTime = (moment: Date) => moment.toString().substring(0,16).split('T')[1];
+const formatMovementType = (movementType: boolean) => movementType ? 'Income' : 'Expenses';
 </script>
 
 <template>
@@ -65,7 +65,7 @@ const formatTime = (moment: Date) => moment.toString().substring(0,16).split('T'
           </td>
           <td class="p-2">{{ formatDate(movement.moment) }}</td>
           <td class="p-2">{{ formatTime(movement.moment) }}</td>
-          <td class="p-2">{{ movement.movement_type }}</td>
+          <td class="p-2">{{ formatMovementType(movement.movement_type) }}</td>
           <td class="p-2">{{ movement.category }}</td>
           <td class="p-2">{{ movement.concept }}</td>
           <td class="p-2">{{ movement.budget }}</td>

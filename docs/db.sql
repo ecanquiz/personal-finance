@@ -84,7 +84,9 @@ create or replace view movements_view AS
     --cursor
    --date timestamp with time zone,
 -- Use DROP FUNCTION movements_with_balances(integer,character varying)
-create or replace function movements_with_balances( yyyy integer, mm character varying ) returns table (
+-- create or replace function movements_with_balances( yyyy integer, mm character varying ) returns table (
+create or replace function movements_with_balances() returns table (
+
     id bigint,
     number character varying,
     moment timestamp with time zone,
@@ -104,7 +106,7 @@ BEGIN
     FOR record IN
         SELECT mv.id, mv.number, mv.moment, mv.movement_type, mv.category, mv.concept, mv.budget, mv.amount 
         FROM  movements_view as mv
-        WHERE to_char(mv.moment, 'yyyy')::integer = yyyy and to_char(mv.moment, 'mm') = mm
+        --WHERE to_char(mv.moment, 'yyyy')::integer = yyyy and to_char(mv.moment, 'mm') = mm
 
         ORDER BY id
     LOOP
@@ -130,7 +132,9 @@ BEGIN
 END;
 $$ language plpgsql;
 
--- select movements_with_balances(2024, '11')
+-- select * from movements_with_balances()
+-- select * from movements_with_balances(2024, '11')
+
 
 
 --movements
@@ -187,3 +191,10 @@ CREATE TRIGGER movement_record_the_balance
 before INSERT ON movements
 FOR EACH ROW
 EXECUTE FUNCTION movements_record_the_balance();
+
+
+-----
+
+create view movements_with_balances_view as
+   select * from movements_with_balances()
+   -- select * from movements_with_balances(2024, '11')
