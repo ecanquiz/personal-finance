@@ -5,7 +5,6 @@ import { supabaseClient } from '../libs/supabase'
 import type { Ref } from 'vue'
 import type { Movement, MovementForm } from '../types'
 
-
 export default () => {
     const router = useRouter();
     const movement = ref<Movement>()
@@ -25,7 +24,7 @@ export default () => {
     const getMovements = async() => {
       pending.value = true;
       const { data, error } = await supabaseClient
-        .from('movements_view')
+        .from(`movements_with_balances_view`)
         .select(`*`)
         .order('id') //, { ascending: false }
         //.eq('month', '11')
