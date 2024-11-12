@@ -1,0 +1,1 @@
+import{e as r,o as s,c as o,a}from"./index-e773a4b0.js";const t=["id"],c=r({__name:"AppErrorMessage",props:{id:{}},setup(n){return(e,p)=>(s(),o("p",{class:"form-error",id:e.id,"aria-live":"assertive"},[a(e.$slots,"default")],8,t))}});export{c as default};
