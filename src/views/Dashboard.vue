@@ -1,22 +1,28 @@
 <script setup lang="ts">
 import {ref, onMounted} from 'vue';
+import type {Ref} from "vue"
+import useMovements from '@/composables/useMovements'
 import Chart_1 from "@/components/dashboard/Chart_1.vue"
 import Chart_2 from "@/components/dashboard/Chart_2.vue"
 import Chart_3 from "@/components/dashboard/Chart_3.vue"
 import Chart_4 from "@/components/dashboard/Chart_4.vue"
+  
+const { getMovementsTypeAndCategoryByMonthOfYear } = useMovements();
 
 //const pickUp = ref([]);
 const pending = ref(false);
 
+const labels_3: Ref<string[]> = ref([])
+const data_3: Ref<number[]> = ref([])
 
 onMounted(async () => {
   pending.value=true
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(pending.value=false);
-    }, 300);
-  });
-
+  const result = await getMovementsTypeAndCategoryByMonthOfYear()
+    result?.forEach((res)  => {
+      labels_3.value.push(res.category)
+      data_3.value.push(res.amount_tot)
+    })
+    pending.value=false
 })
 /* v-if="pickUp && pickUp.length" */
 
@@ -38,7 +44,13 @@ const backgroundColor = [ '#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED' 
         <div class="block"><Chart_1 :backgroundColor="backgroundColor"/></div>
         <div class="block"><Chart_4 :backgroundColor="backgroundColor"/></div>
         <div class="block"><Chart_2 :backgroundColor="backgroundColor"/></div>
-        <div class="block"><Chart_3 :backgroundColor="backgroundColor"/></div>
+        <div class="block">
+          <Chart_3 v-if="labels_3 && data_3"
+            :backgroundColor="backgroundColor"
+            :labels="labels_3"
+            :data='data_3'
+          />
+        </div>
 
         <!--div class="block"><Chart_1 :pickUp="pickUp"/></div>
         <div class="block"><Chart_4 :pickUp="pickUp"/></div>
