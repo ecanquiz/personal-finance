@@ -38,16 +38,18 @@ export default () => {
       pending.value = false;  
     }
 
-    const getMovementsByMonth = async() => {
+    const getMovementsTypeAndCategoryByMonthOfYear = async() => {
       pending.value = true;           
       const { data, error } = await supabaseClient
-        .from('movements_by_month_view')
-        .select(`*`);
+        .from('movements_type_and_category_by_mont_of_year_view')
+        .select(`*`)
+        .eq('movement_type', false);
 
         if (error) {
           console.error('Error fetching data:', error);
         } else {
-          console.log('Data:', data);
+          //console.log('Data:', data);
+          return data;
         }
       pending.value = false;  
     }
@@ -96,7 +98,7 @@ export default () => {
 
       getMovement,
       getMovements,
-      getMovementsByMonth,
+      getMovementsTypeAndCategoryByMonthOfYear,
       submit
     }
 }

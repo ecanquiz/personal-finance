@@ -7,12 +7,10 @@ const {
   pending,
 
   getMovements,
-  //getMovementsByMonth
 } = useMovements();
 
 onMounted( async () => {
   await getMovements()
-  //await getMovementsByMonth()
 });
 
 const formatDate = (moment: Date) => moment.toString().substring(0,16).split('T')[0];
@@ -21,19 +19,15 @@ const formatMovementType = (movementType: boolean) => movementType ? 'Income' : 
 </script>
 
 <template>
-
 <div>
   <h1 v-if="pending" class="text-2xl" align="center">Loading...</h1>
   <h1 v-else class="text-2xl" align="center">Movements List</h1>
-
   <div class="flex my-4">
     <AppLink class="btn btn-primary" :to="`/movements/create`">
       <span>Crear</span>
     </AppLink>
   </div>
-
   <div class="table-data__wrapper">
-
     <table class="table-data">
       <thead class="border-b font-medium dark:border-neutral-500">
         <tr>          
@@ -77,7 +71,5 @@ const formatMovementType = (movementType: boolean) => movementType ? 'Income' : 
     </table>
     <h4 v-if="movements.length === 0">Empty list.</h4>
   </div>
-
 </div>
-
 </template>

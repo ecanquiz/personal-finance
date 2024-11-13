@@ -31,12 +31,45 @@ create or replace view movements_by_mont_of_year_view as
     to_char(date(moment), 'YYYY') as year,
     to_char(date(moment), 'MM') as mm,
     trim(to_char(date(moment), 'Month')) as month
-
   from movements 
   group by movement_type, year, mm, month 
   order by year, mm, month;
 
-select * from movements_by_mont_of_year_view;
+create or replace view movements_type_and_category_by_mont_of_year_view as
+  select
+    movement_type,
+    category,
+    SUM(amount) as amount_tot,
+    to_char(date(moment), 'YYYY') as year,
+    to_char(date(moment), 'MM') as mm,
+    trim(to_char(date(moment), 'Month')) as month
+  from movements_view 
+  group by movement_type, year, mm, month, category 
+  order by year, mm, month, movement_type, category;
+  
+
+
+/* TODO VIEW
+
+  
+  select
+    movement_type,
+    category,
+    SUM(amount) as amount_tot,
+    to_char(date(moment), 'YYYY') as year
+  from movements_view 
+  group by movement_type, year, category 
+  order by year, movement_type, category;
+
+  select
+    movement_type,
+    SUM(amount) as amount_tot,
+    to_char(date(moment), 'YYYY') as year
+  from movements 
+  group by movement_type, year
+  order by year;
+  
+  */
 
 --trigger
 create or replace function movements_generate_number()
