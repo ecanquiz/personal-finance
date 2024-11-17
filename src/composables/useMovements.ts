@@ -33,7 +33,7 @@ export default () => {
       if (error) {
         console.error('Error fetching data:', error);
       } else {
-        movements.value = (data as unknown as Movement[]).reverse();
+        return movements.value = (data as unknown as Movement[]).reverse();
       }
       pending.value = false;  
     }
@@ -43,7 +43,22 @@ export default () => {
       const { data, error } = await supabaseClient
         .from('movements_type_and_category_by_mont_of_year_view')
         .select(`*`)
-        .eq('movement_type', false);
+
+        if (error) {
+          console.error('Error fetching data:', error);
+        } else {
+          //console.log('Data:', data);
+          return data;
+        }
+      pending.value = false;  
+    }
+
+    const getMovementsTypeAndCategoryByMonthOfYearType = async(movementType = false) => {
+      pending.value = true;           
+      const { data, error } = await supabaseClient
+        .from('movements_type_and_category_by_mont_of_year_view')
+        .select(`*`)
+        .eq('movement_type', movementType);
 
         if (error) {
           console.error('Error fetching data:', error);
@@ -99,6 +114,7 @@ export default () => {
       getMovement,
       getMovements,
       getMovementsTypeAndCategoryByMonthOfYear,
+      getMovementsTypeAndCategoryByMonthOfYearType,
       submit
     }
 }
