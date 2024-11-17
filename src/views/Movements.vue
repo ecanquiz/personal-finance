@@ -37,7 +37,7 @@ const formatMovementType = (movementType: boolean) => movementType ? 'Income' : 
           <th class="p-2">MOVEMENT</th>
           <th class="p-2">CATEGORY</th>
           <th class="p-2">CONCEPT</th>
-          <th class="p-2">BUDGET</th>
+          <!--th class="p-2">BUDGET</th-->
           <th class="p-2">AMOUNT</th>
           <th class="p-2">BALANCE</th>
           <!--th class="p-2">CREATED_AT</th-->
@@ -62,9 +62,14 @@ const formatMovementType = (movementType: boolean) => movementType ? 'Income' : 
           <td class="p-2">{{ formatMovementType(movement.movement_type) }}</td>
           <td class="p-2">{{ movement.category }}</td>
           <td class="p-2">{{ movement.concept }}</td>
-          <td class="p-2">{{ movement.budget }}</td>
-          <td class="p-2">{{ movement.amount }}</td>
-          <td class="p-2">{{ movement.balance }}</td>
+          <!--td class="p-2">{{ movement.budget }}</td-->
+          <td
+            class="p-2 text-right"
+            :class="movement.movement_type ? 'text-green-600' : 'text-red-600'"
+          >
+            {{ !movement.movement_type ? '-': ''}}{{ movement.amount }}
+          </td>
+          <td class="p-2 text-blue-600 text-right">{{ movement.balance }}</td>
           <!--td class="p-2">{{ movement.created_at!.toString().substring(0,16) }}</td-->
         </tr>
       </tbody>
